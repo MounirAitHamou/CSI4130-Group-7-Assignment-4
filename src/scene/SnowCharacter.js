@@ -7,6 +7,8 @@ export class SnowCharacter {
         this.animations = gltf.animations;
         this.mixer = new THREE.AnimationMixer(this.model);
         this.material = null;
+        this.currentAnimation = 0;
+        this.lastAnimationTime = null;
     }
 
     async init() {
@@ -24,7 +26,17 @@ export class SnowCharacter {
         });
 
         if (this.animations.length > 0) {
-            this.mixer.clipAction(this.animations[0]).play();
+            this.mixer.clipAction(this.animations[this.currentAnimation]).play();
+            this.lastAnimationTime = 0;
+        }
+    }
+
+    switchAnimation(elapsed) {
+        if (elapsed - this.lastAnimationTime > this.animations[this.currentAnimation].duration) {
+            this.currentAnimation = (this.currentAnimation + 1) % this.animations.length;
+            this.mixer.stopAllAction();
+            this.mixer.clipAction(this.animations[this.currentAnimation]).play();
+            this.lastAnimationTime = elapsed;
         }
     }
 
@@ -33,5 +45,6 @@ export class SnowCharacter {
         if (this.material) {
             this.material.uniforms.uTime.value = elapsed;
         }
+        this.switchAnimation(elapsed);
     }
 }
