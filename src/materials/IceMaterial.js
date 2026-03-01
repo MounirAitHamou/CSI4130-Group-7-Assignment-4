@@ -21,7 +21,7 @@ export async function createIceMaterial(envTexture) {
         fragmentShader: fragment,
         side: THREE.BackSide,
         transparent: true,
-        depthWrite: false,
+        depthWrite: true,
     });
 
     const frontMaterial = new THREE.ShaderMaterial({
@@ -30,7 +30,7 @@ export async function createIceMaterial(envTexture) {
         fragmentShader: fragment,
         side: THREE.FrontSide,
         transparent: true,
-        depthWrite: false,
+        depthWrite: true,
     });
 
     return {

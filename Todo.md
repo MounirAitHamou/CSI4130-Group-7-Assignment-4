@@ -18,11 +18,9 @@
 - [✅] Optional: procedural **ice variation via noise**  
 
 ## 3️⃣ Skinned Mesh / Animated Ice Character
-- [⬜] Load **skinned GLTF model**  
 - [⬜] Apply **standard or physical material** (no ice shader)  
 - [⬜] Set up **AnimationMixer**  
 - [⬜] Play **idle animation**  
-- [⬜] Optional: procedural bone motion (sine or Perlin-based)  
 - [⬜] Test **interaction with lights, shadows, and camera**  
 
 ## 4️⃣ Snow Particle System
@@ -42,13 +40,13 @@
 - [⬜] Flickering lights on sculptures  
 - [⬜] Subtle object movement (shader-based)  
 - [⬜] Snow visually accumulating on animated mesh  
-- [⬜] Multiple animation states for skinned mesh (idle, wave, rotate)  
+- [⬜] Multiple animation states
 - [⬜] Level-of-detail for distant sculptures (`THREE.LOD`)  
 - [⬜] Physics for small objects (Rapier.js / Ammo.js)  
 - [✅] Procedural ice/snow shaders (advanced GLSL)  
 
 ## 7️⃣ Integration & Testing
-- [⬜] Combine **scene, shaders, particles, skinned mesh, interactivity**  
+- [⬜] Combine **scene, shaders, particles, interactivity**  
 - [⬜] Optimize **performance** (shaders, particles, textures)  
 - [⬜] Test on **different devices/browsers**  
 - [⬜] Record **demo video**  

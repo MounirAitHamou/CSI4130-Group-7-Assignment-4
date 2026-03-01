@@ -8,7 +8,7 @@
 # Scene Setup
 - **Ground plane:** snow/ice textured plane  
 - **Ice sculptures:** GLTF / OBJ models  
-- **Animated ice character (skinned mesh):** GLTF with skeletal animation  
+- **Animated snow characters:** GLTF with animation  
 - **Optional props:** trees, lamps, benches  
 - **Camera:** free camera (WASD + mouse) or orbit camera  
 - **Controls:** PointerLockControls or OrbitControls  
@@ -42,19 +42,6 @@
 - GPU-based using `BufferGeometry` + custom shaders  
 - Animated in vertex shader (time uniform)  
 - Optional Perlin-based drift motion  
-
-### Skeletal Animation (NEW CORE FEATURE)
-- At least one **skinned GLTF model** (rigged mesh)
-- Use `THREE.AnimationMixer` for playback
-- Demonstrates:
-  - Bone hierarchy
-  - Skin weights
-  - GPU skinning
-  - Vertex deformation
-- Optional:
-  - Procedural bone animation (e.g., sine-based motion)
-  - Perlin-driven bone motion
-  - Subtle idle animation for realism
 
 ### Optional Enhancements
 - Flickering lights on sculptures  
@@ -107,9 +94,7 @@
 
 ## 3. Particles, Animation & Interactivity
 - Snow particle system  
-- Skeletal animation system  
 - AnimationMixer integration  
-- Procedural bone motion (optional)  
 - Raycasting & click interactions  
 - Perlin-based particle motion  
 
@@ -127,9 +112,9 @@
 | Week  | Tasks |
 |-------|--------|
 | Week 1 | GitHub setup, basic Three.js scene, camera, load models |
-| Week 2 | Lighting, shaders, textures, integrate skinned GLTF model |
-| Week 3 | Snow particle system, skeletal animation system, raycasting |
-| Week 4 | Polish, procedural bone animation, performance tweaks, record demo |
+| Week 2 | Lighting, shaders, textures |
+| Week 3 | Snow particle system, raycasting |
+| Week 4 | Polish, performance tweaks, record demo |
 | Week 5 | Peer review & final PDF |
 
 ---
@@ -141,10 +126,8 @@
   - Lighting  
   - Snow particle system  
   - Procedural shader effects  
-  - Skinned mesh animation  
 - **1–2 page PDF:**  
-  - Description  
-  - Skeletal animation explanation  
+  - Description
   - Shader techniques  
   - GitHub link  
   - Contribution table  
