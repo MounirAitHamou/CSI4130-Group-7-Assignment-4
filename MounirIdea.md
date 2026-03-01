@@ -140,7 +140,7 @@ The project will aim to maintain stable frame rates while preserving visual qual
 - `GLTFLoader` / `OBJLoader`  
 - `AnimationMixer`  
 - `TextureLoader`  
-- Optional: `lil-gui` for parameter adjustment  
+- Optional: `dat.gui` for parameter adjustment  
 
 ---
 
