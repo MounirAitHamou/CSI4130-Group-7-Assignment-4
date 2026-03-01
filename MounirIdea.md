@@ -1,134 +1,208 @@
-# Ice Sculpture Park Simulation – WebGL (Three.js) Plan
+# Ice Sculpture Park Simulation – WebGL (Three.js)
 
-## Goal
-3D Winterlude-style park with ice sculptures, snow, lights, and simple interactivity. Users can explore with the mouse and see dynamic effects like falling snow, procedural variation, and animated skinned objects.
+## Project Goal
 
----
-
-# Scene Setup
-- **Ground plane:** snow/ice textured plane  
-- **Ice sculptures:** GLTF / OBJ models  
-- **Animated snow characters:** GLTF with animation  
-- **Optional props:** trees, lamps, benches  
-- **Camera:** free camera (WASD + mouse) or orbit camera  
-- **Controls:** PointerLockControls or OrbitControls  
+Design and implement a three-dimensional Winterlude-inspired ice sculpture park set at night. The project emphasizes physically motivated shading, procedural surface detail, GPU-driven animation, and cohesive scene composition. The focus is on depth of implementation, visual quality, and rendering sophistication rather than feature quantity.
 
 ---
 
-# Mandatory Features
+# Scene Overview
 
-## Lighting & Shading
-- **Directional light:** moonlight
-- **Point lights:** around sculptures  
-- **Custom shaders:**  
-  - ShaderMaterial or NodeMaterial  
-  - Ice shading with fresnel-like edge highlights
-- **Optional:** transparency/refraction approximation  
+The scene represents an outdoor winter festival environment containing:
 
----
+- Snow-covered ground plane  
+- Multiple ice sculptures (GLTF/OBJ)  
+- Animated skinned character  
+- Decorative elements (trees, lamps, benches)  
+- Atmospheric snow particles  
+- Night-time lighting environment  
 
-## Textures
-- Ice textures for sculptures  
-- Snow texture for ground  
-- **Optional / Advanced:**  
-  - Procedural snow/ice variation using Perlin noise (JS or GLSL)  
-  - Noise blended in fragment shader for realism  
+Users can freely explore the environment using mouse and keyboard controls.
 
 ---
 
-## Dynamic Elements
+# Rendering and Shading
 
-### Snow Particle System
-- GPU-based using `BufferGeometry` + custom shaders  
-- Animated in vertex shader (time uniform)  
-- Optional Perlin-based drift motion  
+## Physically-Inspired Ice Material
 
-### Optional Enhancements
-- Flickering lights on sculptures  
-- Subtle object movement (shader-based)  
-- Snow visually accumulating on animated mesh  
+All ice sculptures will use a custom `ShaderMaterial` written in GLSL. The shader will implement:
+
+- Schlick-style Fresnel approximation  
+- Environment-mapped reflection and refraction  
+- Adjustable index of refraction (IOR)  
+- Thickness-based color absorption  
+- World-space 3D procedural noise for frost variation  
+- Backface rendering pass to simulate volumetric depth  
+- Specular reflection model  
+- Angle-dependent opacity blending  
+
+Optional refinements may include:
+
+- Subtle chromatic dispersion approximation  
+- Micro-surface roughness perturbation via noise  
+
+The goal is to simulate the optical behavior of translucent ice rather than relying on built-in materials.
 
 ---
 
-## Interactivity
-- Mouse camera movement (rotate, pan, zoom)  
-- Raycasting for clickable sculptures  
-  - Highlight on hover  
-  - Display info overlay on click  
-- Optional:
-  - Click animated character to trigger animation change  
+## Lighting Design
+
+The lighting system will be carefully composed to support a night-time winter atmosphere:
+
+- Directional light representing moonlight with tuned cold color temperature  
+- Physically plausible attenuation for point lights placed near sculptures  
+- Shadow mapping enabled for the primary directional light  
+- Rim-lighting effects to enhance silhouette readability  
+- Exposure and tone balance adjustments for night rendering  
+
+Lighting placement and intensity will be designed to emphasize form and material response.
 
 ---
 
-# Optional Features (Bonus)
-- Procedural ice/snow shaders  
-- Physics for small objects (Rapier.js / Ammo.js)  
-- Level-of-detail (THREE.LOD) for distant sculptures  
-- Perlin noise for textures, particles, or animation  
-- Multiple animation states (idle, wave, rotate, etc.)  
+# Texturing and Procedural Detail
+
+## Procedural Frost and Surface Variation
+
+Surface detail will be generated procedurally in shader code:
+
+- 3D world-space noise function  
+- Frost accumulation based on view angle and surface orientation  
+- Noise-driven blending between clear ice and frosted regions  
+- Frost affecting both color and opacity  
+- Stable sampling to avoid texture distortion  
+
+Optional extension:
+
+- Time-based frost growth toggle for demonstration purposes  
+
+---
+
+# Snow Particle System
+
+A GPU-driven particle system will simulate falling snow:
+
+- Single draw call using `BufferGeometry`  
+- Per-particle position and velocity attributes stored on the GPU  
+- Time-based vertex shader animation  
+- Procedural horizontal drift using noise  
+- Soft circular alpha mask for realistic flakes  
+- Depth-based fade near the camera  
+- Carefully tuned blending mode for night visibility  
+
+The system will avoid CPU updates for performance efficiency.
+
+---
+
+# Animation
+
+The animated character will use:
+
+- GLTF skeletal animation  
+- `AnimationMixer` for playback control  
+- Smooth blending between animation states  
+- Optional interaction-triggered animation changes  
+
+---
+
+# Interactivity
+
+User interaction will include:
+
+- Mouse-based camera rotation and movement (`PointerLockControls` or `OrbitControls`)  
+- Raycasting for object selection  
+- Emissive rim highlight effect on hover  
+- Informational overlay displayed on click  
+- Smooth visual transition when selecting objects  
+
+Interaction effects will be integrated visually rather than appearing as separate UI elements.
+
+---
+
+# Performance Considerations
+
+Rendering efficiency will be considered throughout development:
+
+- Instanced rendering for repeated assets (e.g., trees, lamps)  
+- Use of `THREE.LOD` for distant sculptures  
+- Validation of frustum culling  
+- Controlled texture resolutions  
+- Limited draw calls for particle system  
+- Performance profiling using browser tools  
+
+The project will aim to maintain stable frame rates while preserving visual quality.
 
 ---
 
 # Technical Stack
+
 - Three.js (WebGL)  
-- GLSL vertex + fragment shaders  
-- GLTFLoader / OBJLoader  
-- AnimationMixer (skeletal animation system)  
-- TextureLoader  
-- Optional:  
-  - Rapier.js / Ammo.js (physics)  
-  - dat.GUI or lil-gui (parameter tuning)  
+- Custom GLSL vertex and fragment shaders  
+- `GLTFLoader` / `OBJLoader`  
+- `AnimationMixer`  
+- `TextureLoader`  
+- Optional: `lil-gui` for parameter adjustment  
 
 ---
 
 # Team Roles
 
-## 1. Scene & Assets
-- Ground, sculptures, props, textures  
-- Acquire or rig animated GLTF character  
+## Scene and Assets
+- Scene layout and composition  
+- Asset acquisition and preparation  
+- Character rigging and integration  
 
-## 2. Lighting & Shaders
-- Directional + point lights  
-- Ice shaders
-- Perlin noise for texture variation  
+## Shaders and Lighting
+- Ice shader implementation  
+- Procedural frost and noise logic  
+- Lighting setup and shadow configuration  
 
-## 3. Particles, Animation & Interactivity
+## Particles and Interaction
 - Snow particle system  
-- AnimationMixer integration  
-- Raycasting & click interactions  
-- Perlin-based particle motion  
+- Animation integration  
+- Raycasting and interaction effects  
 
-## 4. Integration & Demo
-- Combine systems  
-- Testing & polish  
-- Performance optimization  
-- Record demo video  
-- Write usage instructions  
+## Integration and Optimization
+- System integration  
+- Performance tuning  
+- Testing and debugging  
+- Demo recording  
+- Documentation writing  
 
 ---
 
-# Milestones
+# Development Timeline
 
-| Week  | Tasks |
-|-------|--------|
-| Week 1 | GitHub setup, basic Three.js scene, camera, load models |
-| Week 2 | Lighting, shaders, textures |
-| Week 3 | Snow particle system, raycasting |
-| Week 4 | Polish, performance tweaks, record demo |
-| Week 5 | Peer review & final PDF |
+| Week | Tasks |
+|------|-------|
+| Week 1 | Repository setup, base scene, camera system, model loading |
+| Week 2 | Ice shader implementation and lighting configuration |
+| Week 3 | Particle system and procedural frost integration |
+| Week 4 | Interaction systems and animation integration |
+| Week 5 | Optimization, polish, demo recording, documentation |
 
 ---
 
 # Deliverables
-- **GitHub repository:** source code, shaders, animated models, assets  
-- **2-min demo video:**  
-  - Camera movement  
-  - Lighting  
-  - Snow particle system  
-  - Procedural shader effects  
-- **1–2 page PDF:**  
-  - Description
-  - Shader techniques  
-  - GitHub link  
-  - Contribution table  
-  - Usage instructions  
+
+## GitHub Repository
+- Complete source code  
+- Shader files  
+- Assets and models  
+- Clear project structure  
+- Proper documentation  
+
+## Demonstration Video (2 minutes)
+- Camera navigation  
+- Ice shader behavior  
+- Snow particle system  
+- Procedural frost detail  
+- Interaction showcase  
+- Final cinematic fly-through  
+
+## PDF Submission (1–2 pages)
+- Project description  
+- List of implemented rendering techniques  
+- GitHub link  
+- Contribution table per group member  
+- Acknowledgment of external resources  
+- Usage instructions (controls and interaction)  
