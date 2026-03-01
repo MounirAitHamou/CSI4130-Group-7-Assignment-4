@@ -1,13 +1,13 @@
 ## Scene Overview
 - [✅] Snow-covered ground plane  
 - [⚠️] Multiple ice sculptures (GLTF/OBJ)  
-- [✅] Animated skinned character  
+- [✅] Animated character  
 - [⬜] Decorative elements (trees, lamps, benches)  
 - [✅] Atmospheric snow particles  
 - [✅] Night-time lighting environment  
 
 ## Physically-Inspired Ice Material
-- [⚠️] Schlick-style Fresnel approximation  
+- [✅] Schlick-style Fresnel approximation  
 - [✅] Environment-mapped reflection and refraction  
 - [✅] Adjustable index of refraction (IOR)  
 - [✅] Thickness-based color absorption  
@@ -15,8 +15,8 @@
 - [✅] Backface rendering pass to simulate volumetric depth  
 - [✅] Specular reflection model  
 - [✅] Angle-dependent opacity blending  
-- [⬜] Subtle chromatic dispersion approximation  
-- [⬜] Micro-surface roughness perturbation via noise  
+- [✅] Subtle chromatic dispersion approximation  
+- [✅] Micro-surface roughness perturbation via noise  
 
 ## Lighting Design
 - [✅] Directional light representing moonlight with tuned cold color temperature  

@@ -12,7 +12,8 @@ export async function createIceMaterial(envTexture) {
         envMap: { value: envTexture },
         ior: { value: 1.31 },
         lightDir: { value: new THREE.Vector3(1, 1, 1).normalize() },
-        frostAmount: { value: 0.5 }
+        frostAmount: { value: 0.5 },
+        dispersionAmount: { value: 0.005 }
     }
 
     const backMaterial = new THREE.ShaderMaterial({
