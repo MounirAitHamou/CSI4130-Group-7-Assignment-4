@@ -62,7 +62,7 @@ export class CanalRideau {
             color: 0x8ed1fa,
             metalness: 0.0,
             roughness: 0.05,
-            transmission: 0.6,
+            transmission: 0.3,
             ior: 1.31,
             thickness: 1.5,
             specularIntensity: 1.0,
