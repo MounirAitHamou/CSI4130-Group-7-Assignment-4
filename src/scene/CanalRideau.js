@@ -62,16 +62,16 @@ export class CanalRideau {
             color: 0x8ed1fa,
             metalness: 0.0,
             roughness: 0.05,
-            transmission: 0.2,
+            transmission: 0.6,
             ior: 1.31,
             thickness: 1.5,
             specularIntensity: 1.0,
             clearcoat: 0.8,
             clearcoatRoughness: 0.1,
             envMap: this.envMap,
-            envMapIntensity: 1.5,
+            envMapIntensity: 2.0,
             transparent: true,
-            opacity: 1.0
+            opacity: 0.8
         });
 
         const ice = new THREE.Mesh(iceGeometry, iceMaterial)

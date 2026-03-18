@@ -107,7 +107,7 @@ void main(){
     // Sample the environment map using the refraction vectors to get the refracted color for each channel
     // Only mix in a small amount of the environment color to the base color, to keep the ice looking mostly
     // clear while still showing some of the surroundings, especially at glancing angles
-    float envStrength = 0.3;
+    float envStrength = 0.6;
     refraction.r = mix(baseColor.r, textureCube(envMap, refractR).r, envStrength);
     refraction.g = mix(baseColor.g, textureCube(envMap, refractG).g, envStrength);
     refraction.b = mix(baseColor.b, textureCube(envMap, refractB).b, envStrength);
