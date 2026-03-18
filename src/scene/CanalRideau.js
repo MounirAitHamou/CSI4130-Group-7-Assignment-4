@@ -4,7 +4,6 @@ import { createGroundSnowMaterial } from '../materials/GroundSnowMaterial'
 import { loadTexture, loadEnvironmentMap } from '../systems/AssetLoader.js'
 import { FenceSegment } from './FenceSegment.js'
 import { Lamppost } from './Lamppost.js'
-import { createSnowMaterial } from '../materials/SnowMaterial.js'
 
 await RAPIER.init()
 
@@ -258,7 +257,12 @@ export class CanalRideau {
                     .setFriction(0.02),
                 body
             )
-            const snowMaterial = await createSnowMaterial()
+            const snowMaterial = new THREE.MeshStandardMaterial({
+                color: 0xE0F0FF,
+                roughness: 0.8,
+                metalness: 0.0,
+                side: THREE.DoubleSide
+            });
 
             const mesh = new THREE.Mesh(
                 new THREE.SphereGeometry(radius, 32, 32),

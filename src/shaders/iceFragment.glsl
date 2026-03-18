@@ -105,9 +105,12 @@ void main(){
     vec3 refraction;
 
     // Sample the environment map using the refraction vectors to get the refracted color for each channel
-    refraction.r=textureCube(envMap,refractR).r;
-    refraction.g=textureCube(envMap,refractG).g;
-    refraction.b=textureCube(envMap,refractB).b;
+    // Only mix in a small amount of the environment color to the base color, to keep the ice looking mostly
+    // clear while still showing some of the surroundings, especially at glancing angles
+    float envStrength = 0.3;
+    refraction.r = mix(baseColor.r, textureCube(envMap, refractR).r, envStrength);
+    refraction.g = mix(baseColor.g, textureCube(envMap, refractG).g, envStrength);
+    refraction.b = mix(baseColor.b, textureCube(envMap, refractB).b, envStrength);
 
     vec3 absorption=mix(
         vec3(1.0),

@@ -6,7 +6,7 @@ export async function createIceMaterial(envTexture) {
     const fragment = await loadShader('iceFragment.glsl')
 
     const baseUniforms = {
-        baseColor: { value: new THREE.Color(0xb0e0ff) },
+        baseColor: { value: new THREE.Color(0xbdf3ff) },
         fresnelStrength: { value: 1.5 },
         opacity: { value: 0.3 },
         envMap: { value: envTexture },

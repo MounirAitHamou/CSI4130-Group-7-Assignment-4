@@ -7,4 +7,4 @@ Madona sculpture: https://sketchfab.com/3d-models/madona-sculpture-5e16f3cd478e4
 Animated triceratops: https://sketchfab.com/3d-models/animated-triceratops-skeleton-06cb55f941d94dc8b95ac46f92d89e7c
 Napoleon sculpture: https://sketchfab.com/3d-models/equestrian-statue-of-napoleon-ad3fe0536f4f40c5a2de5b5649b2e639
 Drugdor: https://sketchfab.com/3d-models/drugdor-the-golem-animated-19c1855bdb2c4cdc89da2cfb64da48cf
-Snow texture: https://polyhaven.com/a/snow_02
+Snow texture: https://www.freepik.com/free-vector/texture-with-yellow-paint_988988.htm#fromView=keyword&page=1&position=36&uuid=c0fddca6-6f31-4bd2-8c4a-55b7363da175&query=Snow+texture
