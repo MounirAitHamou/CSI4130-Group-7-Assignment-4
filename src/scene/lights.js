@@ -51,30 +51,3 @@ export function getCSM() {
 export function updateCSM() {
     if (csm) csm.update()
 }
-
-export function addRimLighting(material) {
-    material.onBeforeCompile = (shader) => {
-        shader.uniforms.rimColor = { value: new THREE.Color(0xffffff) };
-        shader.uniforms.rimPower = { value: 3.0 };
-        shader.uniforms.rimStrength = { value: 0.6 };
-
-        shader.fragmentShader = `
-            uniform vec3 rimColor;
-            uniform float rimPower;
-            uniform float rimStrength;
-            ${shader.fragmentShader}
-        `;
-
-        shader.fragmentShader = shader.fragmentShader.replace(
-            '#include <output_fragment>',
-            `
-            float rim = 1.0 - max(dot(normalize(vViewPosition), normal), 0.0);
-            rim = pow(rim, rimPower);
-
-            gl_FragColor.rgb += rimColor * rim * rimStrength;
-
-            #include <output_fragment>
-            `
-        );
-    };
-}

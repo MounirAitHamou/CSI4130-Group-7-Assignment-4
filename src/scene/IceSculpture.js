@@ -1,7 +1,6 @@
 import * as THREE from 'three'
 import { Entity } from './Entity.js'
 import { createIceMaterial } from '../materials/IceMaterial.js'
-import { addRimLighting } from './lights.js'
 
 export class IceSculpture extends Entity {
 
@@ -26,8 +25,6 @@ export class IceSculpture extends Entity {
 
     async init() {
         const { backMaterial, frontMaterial } = await createIceMaterial(this.envMap)
-        addRimLighting(backMaterial)
-        addRimLighting(frontMaterial)
 
         backMaterial.uniforms.enableFrostGrowth.value = this.frostGrowth
         frontMaterial.uniforms.enableFrostGrowth.value = this.frostGrowth
