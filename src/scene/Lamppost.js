@@ -22,6 +22,7 @@ export class Lamppost {
         let bulb = null
 
         lamp.traverse(obj => {
+            // Had to identify each mesh using distinct colors
             if (obj.name === "street_lamp_01_post_mesh_1") glass = obj
             if (obj.name === "street_lamp_01_post_mesh_2") bulb = obj
         })
