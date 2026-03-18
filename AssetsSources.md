@@ -1,5 +1,4 @@
 EnvMap: https://polyhaven.com/a/hansaplatz
-Background:https://commons.wikimedia.org/wiki/File:Rideau_canal,_Ottawa_13_03_24_532000.png
 Concrete texture: https://polyhaven.com/a/concrete_layers
 Street lamp: https://polyhaven.com/a/street_lamp_01
 Dragon sculpture: https://sketchfab.com/3d-models/dragon-sculpture-6b997aff05bd47daa5cc392a45d9f43f
