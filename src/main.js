@@ -3,7 +3,7 @@ import * as THREE from 'three'
 import { setupBackground } from './scene/background.js'
 import { SnowParticles } from './scene/SnowParticles.js'
 import { createCamera } from './scene/camera.js'
-import { createRenderer } from './scene/renderer.js'
+import { createRenderer, handleResize } from './scene/renderer.js'
 import { addLights, updateCSM } from './scene/lights.js'
 
 import { loadGLTF } from './systems/AssetLoader.js'
@@ -116,6 +116,8 @@ async function init() {
     triceratops.model.position.set(-15, triceratops.model.position.y, 0)
 
     world.add(triceratops)
+
+    handleResize(camera, renderer)
 
     animate()
 }
