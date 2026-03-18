@@ -59,7 +59,7 @@ export class CanalRideau {
         )
 
         const iceMaterial = new THREE.MeshPhysicalMaterial({
-            color: 0x52a5c4,
+            color: 0x8ed1fa,
             metalness: 0.0,
             roughness: 0.05,
             transmission: 0.2,
