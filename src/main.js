@@ -45,7 +45,7 @@ async function init() {
     envTexture.mapping = THREE.CubeReflectionMapping
 
 
-    const snow = new SnowParticles({ count: 2000, areaSize: 100, height: 30 })
+    const snow = new SnowParticles({ count: 200000, areaSize: 1000, height: 30 })
     await snow.init()
     world.add(snow)
 

@@ -35,6 +35,8 @@ float noise3D(vec3 p){
     );
 }
 
+// fbm: fractal Brownian motion, combines multiple octaves of noise for more complex patterns
+// https://thebookofshaders.com/13/
 float fbm(vec3 p){
     float v=0.0;
     float a=0.5;
@@ -63,10 +65,13 @@ void main(){
 
     float roughStrength=0.07;
 
-    // create vector tangent that is not parallel to the normal, then use it to create a bitangent, bitangent will always be perpendicular to normal and tangent
+    // create vector tangent that is not parallel to the normal, then use it to create a bitangent,
+    // bitangent will always be perpendicular to normal and tangent
     vec3 tangent=normalize(vec3(normal.y,normal.z,-normal.x));
     vec3 bitangent=normalize(cross(normal,tangent));
 
+    // perturb the normal using a combination of the tangent and bitangent,
+    // scaled by the noise values and roughness strength
     vec3 perturb=
         (tangent*(roughA-0.5)+
          bitangent*(roughB-0.5))*roughStrength;
@@ -113,11 +118,18 @@ void main(){
     refraction*=absorption;
 
     float distFromCenter=length(vWorldPosition-vObjectCenter);
+    // coreMask creates a glowing core effect that is strongest at the center of the object and fades towards the edges, 
+    // simulating how light scatters inside thicker ice
     float coreMask = exp(-distFromCenter * 1.8);
 
     vec3 iceCoreColor = mix(baseColor, vec3(0.35,0.65,1.0), thickness * 0.6);
+    // internalGlow is stronger on fragments that "outside" of thicker areas of the ice,
+    // and slightly dimmed on the backside to create a sense of depth and volume
     vec3 internalGlow = iceCoreColor * coreMask * (uIsBackside ? 0.8 : 1.0);
 
+    // Calculate Fresnel reflectance using Schlick's approximation, 
+    // which gives a more realistic variation of reflectivity based on the angle of incidence
+    // https://en.wikipedia.org/wiki/Schlick%27s_approximation
     float F0=pow((1.0-ior)/(1.0+ior),2.0);
 
     float fresnel=
@@ -218,6 +230,9 @@ void main(){
 
     finalColor+=sparkle*sparkleNoise*0.6*frost;
 
+
+    // Cook-Torrance microfacet specular reflection model for the 
+    // sparkling highlights on the frost, creating a more realistic and dynamic appearance
     float alpha=surfaceRoughness*surfaceRoughness;
     vec3 H = normalize(L + viewDir);
 
@@ -233,7 +248,7 @@ void main(){
     float Gl = NdotL/(NdotL*(1.0-k)+k);
 
     float G = Gv*Gl;
-
+    // Based on formula D * G * F / (4 * NdotL * NdotV) from https://cwyman.org/code/dxrTutors/tutors/Tutor14/tutorial14.md.html
     float spec = (D*G*fresnel)/(4.0*NdotV*NdotL+0.001);
 
     finalColor += vec3(spec);
