@@ -8,12 +8,15 @@ export async function createIceMaterial(envTexture) {
     const baseUniforms = {
         baseColor: { value: new THREE.Color(0xb0e0ff) },
         fresnelStrength: { value: 1.5 },
-        opacity: { value: 0.5 },
+        opacity: { value: 0.3 },
         envMap: { value: envTexture },
         ior: { value: 1.31 },
         lightDir: { value: new THREE.Vector3(1, 1, 1).normalize() },
-        frostAmount: { value: 0.5 },
-        dispersionAmount: { value: 0.005 }
+        frostAmount: { value: 1 },
+        dispersionAmount: { value: 0.005 },
+        time: { value: 0 },
+        enableFrostGrowth: { value: false },
+        frostGrowthSpeed: { value: 1.2 }
     }
 
     const backMaterial = new THREE.ShaderMaterial({

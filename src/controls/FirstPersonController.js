@@ -3,6 +3,7 @@ import * as THREE from 'three'
 export class FirstPersonController {
 
     constructor(camera, domElement) {
+
         this.camera = camera
         this.domElement = domElement
 
@@ -10,8 +11,10 @@ export class FirstPersonController {
         this.lookSpeed = 0.002
 
         this.enabled = false
+
         this.velocity = new THREE.Vector3()
         this.direction = new THREE.Vector3()
+        this.tempMove = new THREE.Vector3()
 
         this.keys = {
             forward: false,
@@ -28,6 +31,7 @@ export class FirstPersonController {
     }
 
     init() {
+
         this.domElement.addEventListener('click', () => {
             this.domElement.requestPointerLock()
         })
@@ -37,6 +41,7 @@ export class FirstPersonController {
         })
 
         document.addEventListener('mousemove', (event) => {
+
             if (!this.enabled) return
 
             this.euler.setFromQuaternion(this.camera.quaternion)
@@ -50,6 +55,7 @@ export class FirstPersonController {
             )
 
             this.camera.quaternion.setFromEuler(this.euler)
+
         })
 
         document.addEventListener('keydown', (e) => this.onKey(e, true))
@@ -57,17 +63,21 @@ export class FirstPersonController {
     }
 
     onKey(event, pressed) {
+
         switch (event.code) {
+
             case 'KeyW': this.keys.forward = pressed; break
             case 'KeyS': this.keys.backward = pressed; break
             case 'KeyA': this.keys.left = pressed; break
             case 'KeyD': this.keys.right = pressed; break
             case 'Space': this.keys.up = pressed; break
-            case 'ControlLeft': this.keys.down = pressed; break
+            case 'ShiftLeft': this.keys.down = pressed; break
+
         }
     }
 
     update(delta) {
+
         if (!this.enabled) return
 
         this.direction.set(0, 0, 0)
@@ -81,10 +91,12 @@ export class FirstPersonController {
 
         this.direction.normalize()
 
-        const move = this.direction.clone()
+        this.tempMove.copy(this.direction)
+
+        this.tempMove
             .applyQuaternion(this.camera.quaternion)
             .multiplyScalar(this.moveSpeed * delta)
 
-        this.camera.position.add(move)
+        this.camera.position.add(this.tempMove)
     }
 }

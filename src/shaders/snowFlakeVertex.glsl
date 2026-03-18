@@ -1,25 +1,62 @@
-attribute float twinkleOffset;
 attribute float speed;
-attribute float driftX;
-attribute float driftZ;
-attribute float swayOffset;
-varying float vOpacity;
+attribute float offset;
+attribute float driftScale;
+
 uniform float time;
-uniform float delta;
-uniform float baseSize;
-uniform float baseOpacity;
+uniform float areaSize;
+uniform float height;
 uniform float windX;
 uniform float windZ;
+uniform float baseSize;
+uniform float baseOpacity;
+
+varying float vOpacity;
+
+float hash(float n) {
+    return fract(sin(n) * 43758.5453);
+}
+
+float noise(vec2 x) {
+
+    vec2 p = floor(x);
+    vec2 f = fract(x);
+
+    f = f*f*(3.0-2.0*f);
+
+    float n = p.x + p.y*57.0;
+
+    return mix(
+        mix(hash(n+0.0), hash(n+1.0), f.x),
+        mix(hash(n+57.0), hash(n+58.0), f.x),
+        f.y
+    );
+}
 
 void main() {
+
     vec3 pos = position;
 
-    pos.x += driftX + windX * delta + sin(time + swayOffset) * 0.4;
-    pos.z += driftZ + windZ * delta + cos(time + swayOffset) * 0.4;
-    pos.y -= speed * delta;
+    float fall = mod(pos.y - speed * time + offset, height);
 
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+    pos.y = fall;
 
-    gl_PointSize = baseSize * (1.0 + 0.5 * sin(time * 3.0 + twinkleOffset));
-    vOpacity = baseOpacity + 0.2 * sin(time * 2.0 + twinkleOffset);
+    float n = noise(vec2(pos.x + time * 0.2, pos.z));
+
+    float driftX = (n - 0.5) * driftScale;
+    float driftZ = (noise(vec2(pos.z, pos.x + time * 0.2)) - 0.5) * driftScale;
+
+    pos.x += driftX + windX * time;
+    pos.z += driftZ + windZ * time;
+
+    vec4 mvPosition = modelViewMatrix * vec4(pos,1.0);
+
+    float depthFade = 1.0 - clamp(abs(mvPosition.z) / 60.0,0.0,1.0);
+
+    float nightBoost = 1.0 + (1.0-depthFade)*0.5;
+
+    gl_PointSize = baseSize * depthFade * nightBoost;
+
+    vOpacity = baseOpacity * depthFade * nightBoost;
+
+    gl_Position = projectionMatrix * mvPosition;
 }

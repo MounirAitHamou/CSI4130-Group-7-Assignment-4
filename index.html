@@ -5,11 +5,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>csi4130-project</title>
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+
+    #crosshair {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      background: white;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 10;
+      box-shadow: 0 0 6px white;
+    }
+  </style>
 </head>
 
 <body>
+
   <div id="app"></div>
+
+  <div id="crosshair"></div>
+
   <script type="module" src="/src/main.js"></script>
+
 </body>
 
 </html>
