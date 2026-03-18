@@ -61,10 +61,12 @@ export class CanalRideau {
 
         const iceMaterial = new THREE.MeshStandardMaterial({
             color: 0xd8f4ff,
-            roughness: 0.05,
-            metalness: 0.02,
+            roughness: 0.0,
+            metalness: 0.0,
             envMap: this.envMap,
-            envMapIntensity: 1.0
+            envMapIntensity: 0.4,
+            transparent: true,
+            opacity: 0.3,
         })
 
         const ice = new THREE.Mesh(iceGeometry, iceMaterial)
@@ -164,7 +166,7 @@ export class CanalRideau {
 
         for (let i = 0; i < segmentCount; i++) {
 
-            const fence = new FenceSegment(segmentLength, this.scale, this.envMap)
+            const fence = new FenceSegment(segmentLength, this.scale, this.envMap, diff, nor, rough)
 
             const x = -canalLength / 2 + i * segmentLength + segmentLength / 2
 
@@ -176,7 +178,7 @@ export class CanalRideau {
 
         for (let i = 0; i < segmentCount; i++) {
 
-            const fence = new FenceSegment(segmentLength, this.scale, this.envMap)
+            const fence = new FenceSegment(segmentLength, this.scale, this.envMap, diff, nor, rough)
 
             const x = -canalLength / 2 + i * segmentLength + segmentLength / 2
 

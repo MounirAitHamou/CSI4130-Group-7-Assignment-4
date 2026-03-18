@@ -2,7 +2,7 @@ import * as THREE from 'three'
 
 export class FenceSegment {
 
-    constructor(length = 5, scale = 1, envMap = null) {
+    constructor(length = 5, scale = 1, envMap = null, diff = null, nor = null, rough = null) {
 
         this.model = new THREE.Group()
 
@@ -17,10 +17,10 @@ export class FenceSegment {
         ]
 
         const stoneMat = new THREE.MeshStandardMaterial({
-            color: 0x9a9a9a,
-            roughness: 0.9,
-            metalness: 0,
-            envMap
+            map: diff,
+            normalMap: nor,
+            roughnessMap: rough,
+            color: 0x444444
         })
 
         const metalMat = new THREE.MeshStandardMaterial({

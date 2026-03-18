@@ -38,7 +38,7 @@ export async function addLights(scene, camera) {
     const moonGeometry = new THREE.SphereGeometry(5, 32, 32)
     const moonMesh = new THREE.Mesh(moonGeometry, moonMaterial)
 
-    const moonDir = new THREE.Vector3(-1, -1, -0.5).normalize()
+    const moonDir = new THREE.Vector3(1, 1, 0.5).normalize()
     moonMesh.position.copy(moonDir).multiplyScalar(200)
 
     scene.add(moonMesh)

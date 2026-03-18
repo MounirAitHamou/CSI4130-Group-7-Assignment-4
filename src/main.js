@@ -4,9 +4,9 @@ import { setupBackground } from './scene/background.js'
 import { SnowParticles } from './scene/SnowParticles.js'
 import { createCamera } from './scene/camera.js'
 import { createRenderer } from './scene/renderer.js'
-import { addLights, getCSM, updateCSM } from './scene/lights.js'
+import { addLights, updateCSM } from './scene/lights.js'
 
-import { loadGLTF, loadEnvironmentMap, loadTexture } from './systems/AssetLoader.js'
+import { loadGLTF } from './systems/AssetLoader.js'
 import { World } from './systems/World.js'
 
 import { FirstPersonController } from './controls/FirstPersonController.js'
