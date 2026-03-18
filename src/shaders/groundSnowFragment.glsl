@@ -2,7 +2,6 @@ varying vec3 vNormal;
 varying vec3 vWorldPosition;
 varying vec2 vUv;
 
-uniform float uTime;
 uniform vec3 uBaseColor;
 uniform vec3 uShadowColor;
 uniform vec3 uSunDirection;
@@ -40,7 +39,7 @@ void main() {
     
     vec3 lighting = mix(uShadowColor, uBaseColor, diff * 0.8 + 0.2);
 
-    float sparkle = pow(hash(vWorldPosition * 100.0 + sin(uTime * 0.5)), 50.0) * uSparkleStrength;
+    float sparkle = pow(hash(vWorldPosition * 100.0), 50.0) * uSparkleStrength;
     
     gl_FragColor = vec4(lighting + vec3(sparkle), 1.0);
 }

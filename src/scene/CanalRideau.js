@@ -320,10 +320,6 @@ export class CanalRideau {
     }
 
     update(delta, elapsed, frameCount, frustum) {
-
-        if (this.snowMaterial)
-            this.snowMaterial.uniforms.uTime.value = elapsed
-
         this.physicsWorld.step()
 
         this.balls.forEach(ball => {

@@ -7,7 +7,6 @@ export async function createGroundSnowMaterial() {
 
     const material = new THREE.ShaderMaterial({
         uniforms: {
-            uTime: { value: 0 },
             uBaseColor: { value: new THREE.Color(0xffffff) },
             uShadowColor: { value: new THREE.Color(0xd0e0ff) },
             uSunDirection: { value: new THREE.Vector3(1, 1, 1).normalize() },
